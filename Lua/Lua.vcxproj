@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.props" Condition="Exists('..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -21,36 +20,37 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F167AF0D-805B-4F6C-BE63-14CD9CD553DF}</ProjectGuid>
-    <RootNamespace>LuaGame</RootNamespace>
+    <ProjectGuid>{BB279C6D-925B-401D-8961-045E3E333FE1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Lua</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -70,87 +70,141 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>lua</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>lua</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>lua</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>lua</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\Lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;..\$(IntDir)\lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;..\$(IntDir)\lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;..\$(IntDir)\lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;..\$(IntDir)\lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapFormat.cpp" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Scripts\main.lua" />
+    <ClCompile Include="lapi.c" />
+    <ClCompile Include="lauxlib.c" />
+    <ClCompile Include="lbaselib.c" />
+    <ClCompile Include="lbitlib.c" />
+    <ClCompile Include="lcode.c" />
+    <ClCompile Include="lcorolib.c" />
+    <ClCompile Include="lctype.c" />
+    <ClCompile Include="ldblib.c" />
+    <ClCompile Include="ldebug.c" />
+    <ClCompile Include="ldo.c" />
+    <ClCompile Include="ldump.c" />
+    <ClCompile Include="lfunc.c" />
+    <ClCompile Include="lgc.c" />
+    <ClCompile Include="linit.c" />
+    <ClCompile Include="liolib.c" />
+    <ClCompile Include="llex.c" />
+    <ClCompile Include="lmathlib.c" />
+    <ClCompile Include="lmem.c" />
+    <ClCompile Include="loadlib.c" />
+    <ClCompile Include="lobject.c" />
+    <ClCompile Include="lopcodes.c" />
+    <ClCompile Include="loslib.c" />
+    <ClCompile Include="lparser.c" />
+    <ClCompile Include="lstate.c" />
+    <ClCompile Include="lstring.c" />
+    <ClCompile Include="lstrlib.c" />
+    <ClCompile Include="ltable.c" />
+    <ClCompile Include="ltablib.c" />
+    <ClCompile Include="ltm.c" />
+    <ClCompile Include="lundump.c" />
+    <ClCompile Include="lutf8lib.c" />
+    <ClCompile Include="lvm.c" />
+    <ClCompile Include="lzio.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Helpers.h" />
-    <ClInclude Include="MapFormat.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="SpriteSheet.h" />
-    <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="lapi.h" />
+    <ClInclude Include="lauxlib.h" />
+    <ClInclude Include="lcode.h" />
+    <ClInclude Include="lctype.h" />
+    <ClInclude Include="ldebug.h" />
+    <ClInclude Include="ldo.h" />
+    <ClInclude Include="lfunc.h" />
+    <ClInclude Include="lgc.h" />
+    <ClInclude Include="llex.h" />
+    <ClInclude Include="llimits.h" />
+    <ClInclude Include="lmem.h" />
+    <ClInclude Include="lobject.h" />
+    <ClInclude Include="lopcodes.h" />
+    <ClInclude Include="lparser.h" />
+    <ClInclude Include="lprefix.h" />
+    <ClInclude Include="lstate.h" />
+    <ClInclude Include="lstring.h" />
+    <ClInclude Include="ltable.h" />
+    <ClInclude Include="ltm.h" />
+    <ClInclude Include="lua.h" />
+    <ClInclude Include="lua.hpp" />
+    <ClInclude Include="luaconf.h" />
+    <ClInclude Include="lualib.h" />
+    <ClInclude Include="lundump.h" />
+    <ClInclude Include="lvm.h" />
+    <ClInclude Include="lzio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.targets" Condition="Exists('..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.targets')" />
   </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.props'))" />
-    <Error Condition="!Exists('..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_2015.2017.4.24.1\build\native\directxtk_desktop_2015.targets'))" />
-  </Target>
 </Project>
