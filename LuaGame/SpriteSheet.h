@@ -152,7 +152,7 @@ public:
 			rotation -= XM_PIDIV2;
 		}
 
-		XMFLOAT2 origin = XMFLOAT2(rect.z / 2.f, rect.w / 2.f);
+		XMFLOAT2 origin = frame.origin;
 
 		RECT dest;
 		dest.left = rect.x;
@@ -162,7 +162,7 @@ public:
 		dest.bottom = rect.y+rect.w;
 
 
-		batch->Draw(mTexture.Get(), dest, &frame.sourceRect, color, rotation);
+		batch->Draw(mTexture.Get(), dest, &frame.sourceRect, color, rotation, origin);
 	}
 
 	/*void XM_CALLCONV Draw(DirectX::SpriteBatch* batch, const SpriteFrame& frame,

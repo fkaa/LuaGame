@@ -4,12 +4,13 @@
 # To learn how to import these sprites into your MonoGame project visit:
 # http://www.codeandweb.com/texturepacker/monogame
 #
-# Sprite sheet: Sprites.png (256 x 256)
-# $TexturePacker:SmartUpdate:7d92e5e1c775382e876cb6c29fa61d40:f28c13bd91892aa0a81a92b356550898:a4ea2fbda0ea174866bf6a7d218d7160$
+# Sprite sheet: Sprites.png (64 x 64)
+# $TexturePacker:SmartUpdate:275c5ed7315b2f788e1f1d3b5d32e818:56dbdf020393faf7f424d82c8b83a4df:a4ea2fbda0ea174866bf6a7d218d7160$
 #
 
-Body;0;1;1;128;128;128;128;0.5;0.5
-MetalWall;0;1;213;16;16;16;16;0.5;0.5
-Placeholder;0;1;231;16;16;16;16;0.5;0.5
-Turret;1;1;131;26;80;128;32;0.7875;0.5
-White;0;1;249;1;1;1;1;0.5;0.5
+Bullet;0;1;1;16;16;16;16;0.5;0.5
+Dirt;0;1;19;16;16;16;16;0;0
+MetalWall;0;1;37;16;16;16;16;0;0
+Placeholder;0;19;1;16;16;16;16;0;0
+Player;0;37;1;16;16;16;16;0.5;0.5
+White;0;1;55;1;1;1;1;0;0

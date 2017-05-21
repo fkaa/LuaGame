@@ -4,17 +4,18 @@
  * Contains references to each image within the sprite sheet.
  *
  * http://www.codeandweb.com/texturepacker
- * $TexturePacker:SmartUpdate:7d92e5e1c775382e876cb6c29fa61d40:f28c13bd91892aa0a81a92b356550898:a4ea2fbda0ea174866bf6a7d218d7160$
+ * $TexturePacker:SmartUpdate:275c5ed7315b2f788e1f1d3b5d32e818:56dbdf020393faf7f424d82c8b83a4df:a4ea2fbda0ea174866bf6a7d218d7160$
  *
  */
 namespace TexturePackerMonoGameDefinitions
 {
 	public class Sprites
 	{
-		public const string Body = "Body";
+		public const string Bullet = "Bullet";
+		public const string Dirt = "Dirt";
 		public const string MetalWall = "MetalWall";
 		public const string Placeholder = "Placeholder";
-		public const string Turret = "Turret";
+		public const string Player = "Player";
 		public const string White = "White";
 	}
 }
