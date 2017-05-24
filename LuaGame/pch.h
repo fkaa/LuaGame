@@ -35,7 +35,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include <lua.hpp>
+#include "../Lua/lua.hpp"
 
 namespace DX
 {

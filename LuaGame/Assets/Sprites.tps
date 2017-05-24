@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.4.0</string>
         <key>fileName</key>
-        <string>C:/Users/Tund/Documents/Visual Studio 2017/Projects/LuaGame/LuaGame/Assets/Sprites.tps</string>
+        <string>C:/Users/Tund/Documents/visual studio 2017/Projects/LuaGame/LuaGame/Assets/Sprites.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -192,7 +192,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -200,41 +200,61 @@
             <key>defaultPivotPoint</key>
             <point_f>0.5,0.5</point_f>
             <key>writePivotPoints</key>
-            <false/>
+            <true/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Body.png</key>
+            <key type="filename">Bullet.png</key>
+            <key type="filename">Player.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,32,64,64</rect>
+                <rect>4,4,8,8</rect>
                 <key>scale9Paddings</key>
-                <rect>32,32,64,64</rect>
+                <rect>4,4,8,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Turret.png</key>
+            <key type="filename">Dirt.png</key>
+            <key type="filename">MetalWall.png</key>
+            <key type="filename">Placeholder.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
+                <point_f>0,0</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,8,64,16</rect>
+                <rect>4,4,8,8</rect>
                 <key>scale9Paddings</key>
-                <rect>32,8,64,16</rect>
+                <rect>4,4,8,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">White.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>0,0,1,1</rect>
+                <key>scale9Paddings</key>
+                <rect>0,0,1,1</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>Body.png</filename>
-            <filename>Turret.png</filename>
+            <filename>Placeholder.png</filename>
+            <filename>MetalWall.png</filename>
+            <filename>White.png</filename>
+            <filename>Dirt.png</filename>
+            <filename>Bullet.png</filename>
+            <filename>Player.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

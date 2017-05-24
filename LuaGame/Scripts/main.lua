@@ -3,6 +3,7 @@ selected_map = 0
 current_map = nil
 current_map_name = nil
 current_palette = 0
+player_lost = 0
 
 blank = load_sprite("White")
 player_sprite = load_sprite("Player")
@@ -27,6 +28,8 @@ function Player:new(x, y)
    setmetatable(player, Player)
    player.x = x
    player.y = y
+   player.px = x
+   player.py = y
    player.angle = 0
    player.reload = 0.5
    player.radius = 0.4
@@ -46,6 +49,8 @@ function Player:shoot()
 	if self.reload == 0 then
 		-- shoot
 		table.insert(bullets, {
+			px = 0,
+			py = 0,
 			x = self.x + math.sin(self.angle) * 0.5,
 			y = self.y + math.cos(self.angle) * 0.5,
 			angle = self.angle
@@ -56,6 +61,8 @@ function Player:shoot()
 end
 
 function Player:forward(speed, dt)
+	self.px = self.x
+	self.py = self.y
 	self.x = self.x + math.sin(self.angle) * speed * dt
 	self.y = self.y + math.cos(self.angle) * speed * dt
 end
@@ -147,34 +154,116 @@ function update(dt)
 			save_map(current_map, current_map_name)
 		end
 
-		if QP then
+		if EscapeP then
 			state = "menu"
 		end
 	elseif state == "game" then
-		local vel = 2.1
-		if W then
-			players[1]:forward(vel, dt)
-		elseif S then
-			players[1]:forward(-vel, dt)
-		end
+		if EscapeP then
+			state = "menu"
+		elseif player_lost ~= 0 then
+			if RP then
+				players[1] = Player:new(current_map[1] + 0.5, current_map[2] + 0.5)
+				players[2] = Player:new(current_map[3] + 0.5, current_map[4] + 0.5)
+				player_lost = 0
+				for k in pairs(bullets) do
+					bullets[k] = nil
+				end
+			end
+		else
+			local keybindings = {
+				{W,  S,    A,    D,     Space},
+				{Up, Down, Left, Right, RightControl}
+			}
 
-		local ang_vel = 2.5
-		if A then
-			players[1]:left(ang_vel, dt)
-		elseif D then
-			players[1]:right(ang_vel, dt)
-		end
+			for i,v in ipairs(keybindings) do
+				local vel = 2.1
+				if v[1] then
+					players[i]:forward(vel, dt)
+				elseif v[2] then
+					players[i]:forward(-vel, dt)
+				end
 
-		if Space then
-			players[1]:shoot()
-		end
+				local ang_vel = 2.5
+				if v[3] then
+					players[i]:left(ang_vel, dt)
+				elseif v[4] then
+					players[i]:right(ang_vel, dt)
+				end
 
-		players[1]:update(dt)
+				if v[5] then
+					players[i]:shoot()
+				end
+
+				players[i]:update(dt)
+			end
 		
-		local bul_speed = 4
-		for i,v in ipairs(bullets) do
-			v.x = v.x + math.sin(v.angle) * bul_speed * dt
-			v.y = v.y + math.cos(v.angle) * bul_speed * dt
+			local bul_speed = 4
+			for i,v in ipairs(bullets) do
+				v.px = v.x
+				v.py = v.y
+				v.x = v.px + math.sin(v.angle) * bul_speed * dt
+				v.y = v.py + math.cos(v.angle) * bul_speed * dt
+			end
+
+			local br = 0.10
+			local pr = 0.38
+
+			local to_remove = {}
+			for bi,v in ipairs(bullets) do
+				for i=0,(16*9-1) do
+					local idx = 5 + i
+					local tile = tiles[current_map[idx] + 1]
+
+					local x = i % 16
+					local y = i // 16
+					local tx = x + 0.5
+					local ty = y + 0.5
+
+					if tile.physics then
+
+						if v.x > x and v.x < x + 1 and v.y > y and v.y < y + 1 then
+							table.insert(to_remove, bi)
+						end
+					end
+				end
+			end
+
+			for i,v in ipairs(to_remove) do
+				table.remove(bullets, v)
+			end
+
+			
+			for bi,pv in ipairs(players) do
+				for i=0,(16*9-1) do
+					local idx = 5 + i
+					local tile = tiles[current_map[idx] + 1]
+
+					local x = i % 16
+					local y = i // 16
+
+					if tile.physics then
+						if pv.x + 0.2 > x and pv.x - 0.2 < x + 1 and pv.y + 0.2 > y and pv.y - 0.2 < y + 1 then
+							pv.x = pv.px
+							pv.y = pv.py
+						end
+					end
+				end
+			end
+
+			do
+				for i,v in ipairs(bullets) do
+					for pi,pv in ipairs(players) do
+						local dx = v.x - pv.x
+						local dy = v.y - pv.y
+
+						local len = dx * dx + dy * dy
+						if len < br * br + pr * pr then
+							player_lost = pi
+							return
+						end
+					end
+				end
+			end
 		end
 	end
 end
@@ -229,7 +318,7 @@ function render(dt)
 				end
 			end
 			
-			draw_text(k, x + 60, y + ih, col)
+			draw_text(k, x, y + ih + 8, col)
 
 			x = x + iw + ipadding
 			i = i + 1
@@ -290,18 +379,22 @@ function render(dt)
 			end
 		end
 
+		local colors = {
+			 0x84A5FFff,
+			 0xFF9F7Fff
+		}
+
 		for i,v in ipairs(players) do
-			draw_sprite(player_sprite, v.x*mulw, v.y*mulh, mulw, mulh, 0xffffffff, -v.angle)
+			draw_sprite(player_sprite, v.x*mulw, v.y*mulh, mulw, mulh, colors[i], -v.angle)
 		end
 
 		for i,v in ipairs(bullets) do
 			draw_sprite(bullet_sprite, v.x*mulw, v.y*mulh, mulw, mulh, 0xffffffff, -v.angle)
 		end
+
+		if player_lost ~= 0 then
+			draw_sprite(blank, width / 2 - 220, height / 2-20, 420, 60, 0x000000aa, 0)
+			draw_text("Player " .. (3 - player_lost) .. " won! Press R to restart!", width / 2 - 200, height / 2, colors[3 - player_lost])
+		end
 	end
-end
-
-function click(id)
-end
-
-function key(id)
 end

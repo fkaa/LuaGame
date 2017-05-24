@@ -106,7 +106,9 @@ void Game::Initialize(HWND window, int width, int height)
 
 	TRACE("Load script")
 
-	luaL_loadfile(L, "Scripts/main.lua");
+	if (luaL_loadfile(L, "Scripts/main.lua") != 0)
+		throw LuaException(L);
+
 	if (lua_pcall(L, 0, 0, 0) != 0)
 		throw LuaException(L);
 
@@ -167,6 +169,7 @@ void Game::Update(DX::StepTimer const& timer)
 	KEY(D5);
 
 	KEY(Q);
+	KEY(R);
 
 	KEY(W);
 	KEY(A);
@@ -180,7 +183,8 @@ void Game::Update(DX::StepTimer const& timer)
 
 	KEY(E);
 	KEY(Space);
-	KEY(NumPad0);
+	KEY(RightControl);
+	KEY(Escape);
 
 	lua_getglobal(L, "update");
 	lua_pushnumber(L, elapsedTime);

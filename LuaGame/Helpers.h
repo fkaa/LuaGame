@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-#include <lua.hpp>
+#include "../Lua/lua.hpp"
 
 #define TRACE( s )            \
 {                             \
@@ -16,6 +16,7 @@ class LuaException {
 public:
 	LuaException(lua_State *L) {
 		err = std::string(lua_tostring(L, -1));
+		TRACE(err);
 	}
 
 	virtual const char* what() const throw()
